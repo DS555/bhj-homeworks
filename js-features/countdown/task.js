@@ -1,4 +1,3 @@
-console.log('is worked');
 const timer = document.getElementById('timer');
 const mainCounter = function(){
     let counter = +timer.textContent;
