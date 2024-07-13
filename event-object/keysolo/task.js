@@ -18,13 +18,41 @@ class Game {
 
   registerEvents() {
     /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода символа вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+    TO DO:
+    Написать обработчик события, который откликается
+    на каждый введённый символ.
+    В случае правильного ввода символа вызываем this.success()
+    При неправильном вводе символа - this.fail();
+    DOM-элемент текущего символа находится в свойстве this.currentSymbol.
+    Допишите метод registerEvents, в котором необходимо задать обработчик нажатия клавиш.
+    Принцип работы метода:
+    Получить DOM-элемент текущего символа, который необходимо ввести (свойство this.currentSymbol)
+    Получить символ, который был введён с клавиатуры.
+    Если два символа одинаковые, вызывать метод this.success
+    Если два символа отличаются, вызвать метод this.fail
+    При сравнении регистр не должен быть важен (а или А)
+    */
+   /*
+    window.addEventListener('keyup', event => {
+      console.log (event.key)
+      if (event.key.toLowerCase() === checkSymbol.toLowerCase()) {
+        console.log ('совпало' + event.key)
+      }
+    });
+    */
+    let checkKey = (e) => {
+      const current = this.currentSymbol
+      if (e.key === 'Shift') {
+        console.log('shift ON'); //для себя проверка
+        return;
+      }
+      if (current.textContent == e.key) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    }
+      document.addEventListener('keyup', checkKey);
   }
 
   success() {
