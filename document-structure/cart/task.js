@@ -17,12 +17,8 @@ products[0].addEventListener('click', (event) => {
     if (event.target.classList.contains('product__quantity-control_dec')) {
         event.preventDefault();
         const productQuantity = event.target.nextElementSibling;
-        if (productQuantity) {
+        if (productQuantity.innerText > 1) {
             productQuantity.innerText--;
-
-            if (productQuantity.innerText < 1) {
-                productQuantity.innerText = 1;
-            }
         }
     }
 
@@ -49,6 +45,8 @@ products[0].addEventListener('click', (event) => {
             cartProduct.setAttribute('data-id', cartProdID);
 
             const cartProductImage = product.querySelector('img').cloneNode(true);
+            cartProductImage.classList.add('cart__product-image');
+            cartProductImage.classList.remove('product__image');
             let cartProductCount = document.createElement('div');
             cartProductCount.classList.add('cart__product-count');
             cartProductCount.textContent = cartProductValue;

@@ -1,11 +1,15 @@
 const form = document.forms[0];
 const taskInput = document.getElementById('task__input');
 const taskList = document.getElementById('tasks__list');
-const button = document.getElementById('tasks__add');
+// const button = document.getElementById('tasks__add');
+
+
+taskInput.setAttribute('required', '');
 
 form.addEventListener('submit', (event) => {
-    console.log('отправка формы submit');
     event.preventDefault();
+    console.log('отправка формы submit');
+
     let task = document.createElement('div');
     task.classList.add('task');
     taskList.appendChild(task);
@@ -13,7 +17,16 @@ form.addEventListener('submit', (event) => {
     let taskTitle = document.createElement('div');
     task.appendChild(taskTitle);
     taskTitle.classList.add('task__title');
-    taskTitle.textContent = `${taskInput.value}`;
+    
+    let inputValue = `${taskInput.value}`;
+    console.log(inputValue);
+    taskTitle.textContent = (inputValue.trim());
+    console.log(taskTitle.textContent);
+    if (taskTitle.textContent === '') {
+        task.remove();
+        form.reset();
+        return;
+    };
         
     const taskRemove = document.createElement('a');
     taskRemove.href = '#';
@@ -21,7 +34,7 @@ form.addEventListener('submit', (event) => {
     taskRemove.textContent = 'x';
     task.append(taskTitle, taskRemove);
     form.reset();
-
+    
     taskRemove.addEventListener('click', (event) => {
         event.preventDefault();
         console.log('тык на крестик');
